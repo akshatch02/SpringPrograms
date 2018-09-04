@@ -1,0 +1,50 @@
+package com.cg.mypaymentapp.beans;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Cust_Wallet")
+public class Wallet 
+{
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="wallet_id")
+	int walletId;
+	
+	@Column(name="c_balance")
+	private BigDecimal balance;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="trans_id")
+	private List<Transactions> transaction;
+	
+	public Wallet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Wallet(BigDecimal amount) {
+		this.balance=amount;
+	}
+
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	
+}
